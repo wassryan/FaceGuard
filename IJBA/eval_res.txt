@@ -1,0 +1,29 @@
+ijba_res18_naive.pth.tar
+load trained model complete
+Traceback (most recent call last):
+  File "eval_ijba.py", line 157, in <module>
+    extract_feat(arch, model_path, yaw_type)
+  File "eval_ijba.py", line 134, in extract_feat
+    for i, (input, yaw) in enumerate(img_loader):
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 363, in __next__
+    data = self._next_data()
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 989, in _next_data
+    return self._process_data(data)
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/dataloader.py", line 1014, in _process_data
+    data.reraise()
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/_utils.py", line 395, in reraise
+    raise self.exc_type(msg)
+FileNotFoundError: Caught FileNotFoundError in DataLoader worker process 0.
+Original Traceback (most recent call last):
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/_utils/worker.py", line 185, in _worker_loop
+    data = fetcher.fetch(index)
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 44, in fetch
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/torch/utils/data/_utils/fetch.py", line 44, in <listcomp>
+    data = [self.dataset[idx] for idx in possibly_batched_index]
+  File "/Users/liuchenxi/Desktop/研一上/recognition pattern/practice/DREAM/src/IJBA/selfDefine.py", line 33, in __getitem__
+    img = Image.open(path).convert("RGB")
+  File "/opt/anaconda3/envs/pytorch/lib/python3.7/site-packages/PIL/Image.py", line 2878, in open
+    fp = builtins.open(filename, "rb")
+FileNotFoundError: [Errno 2] No such file or directory: '/mnt/SSD/rongyu/data/IJBA/align_image_11/ijb_a_11_align_split1/frame/31593_01800.png'
+
