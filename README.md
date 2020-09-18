@@ -1,4 +1,8 @@
-# FaceGuard
-## Attention
-1. Please push your code in your own branch named as "xx\_dev"
-2. don't push any big files, please use .gitignore to filter them.
+### Requirement
+1. Environment: MacOS, python3.6
+2. Dependence
+- PyQt5
+- imutils
+- CMake(pip install CMake)
+- Boost(pip install Boost)
+- dlib(pip install dlib)
