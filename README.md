@@ -87,3 +87,6 @@ CASIA-FaceV5，该数据集包含了来自500个人的2500张亚洲人脸图片.
 
 `register.py`
 注册时，输入img的path传入，加入到feature.bin文件中，同时在csv文件中给予该用户其用户id，用于后续
+
+`compare.py`
+对比时，根据传入的img的path，比较feature database里的数据，返回top5的结果
