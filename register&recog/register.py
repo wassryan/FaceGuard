@@ -130,7 +130,7 @@ def extract_feat(arch, model_path, yaw_type,img_path):
         input_var = torch.autograd.Variable(input, volatile=True)
         output = model(input_var, yaw_var)
         output_data = output.cpu().data.numpy()
-        print(output_data[0,:])
+        #print(output_data[0,:])
         feat_num  = output.size(0)
         save_path = './db/' + str(name_id) + '.npy'
         if not os.path.exists('./db/'):
