@@ -64,6 +64,9 @@ CASIA-FaceV5，该数据集包含了来自500个人的2500张亚洲人脸图片.
 `train.py`&`delfDefine.py`
 修改了一部分内容 适合我们的数据集 这里的yaw我都写成了0，先看看训练结果，不好再细分
 
+`add_new_img.py`
+对classmate的图片进行了data augmentation（gaussian noise/salt&pepper noise/blur）
+
 当前进展：
 
 `train section`
@@ -73,6 +76,12 @@ CASIA-FaceV5，该数据集包含了来自500个人的2500张亚洲人脸图片.
 2. 使用官方crop数据集进行训练
 
 3. 使用dlib库crop的数据集进行训练
+
+4. 加入了classmate的图片进入train来训练
+
+5. 对classmate的图片进行了data augmentation（gaussian noise/salt&pepper noise/blur），每个人\*3，原图和gaussian/blur在trian集，s&p在test集
+
+目前用的model是5生成的模型
 
 `evaluate section`
 
