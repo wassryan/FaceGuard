@@ -62,9 +62,11 @@ CASIA-FaceV5，该数据集包含了来自500个人的2500张亚洲人脸图片.
 写list.txt和label.txt
 
 `train.py`&`delfDefine.py`
+
 修改了一部分内容 适合我们的数据集 这里的yaw我都写成了0，先看看训练结果，不好再细分
 
 `add_new_img.py`
+
 对classmate的图片进行了data augmentation（gaussian noise/salt&pepper noise/blur）
 
 当前进展：
@@ -88,6 +90,9 @@ CASIA-FaceV5，该数据集包含了来自500个人的2500张亚洲人脸图片.
 使用dlib crop之后的组员的图片
 
 在2训练的模型，用crop之后的组员进行测试，达到0.75（确切的说只有我识别不出来，先封装吧，后续再说）
+
+`2020-09-23`
+发现CropCaffe()函数是用来crop人脸的（正方形），然后再resize成224\*224的，然后不适用于我们自己的数据集，于是打算自己crop一个正方形的人脸，最后直接resize成224，不变形，hope this will work，使用的代码`cropFaces.py`
 
 ### 5.封装
 （最新版在register&recog的branch里）
