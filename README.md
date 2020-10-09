@@ -1,15 +1,16 @@
 # FaceGuard
 ## run the model
-`python recog.py`
+### register part
+`python register.py`
+
+`new_img`refer to the img path that the people who are newly registered
+### recog part
+`python recog_new.py`
 
 input : `cur_img` refer to the img that we want to recog
 
 output: `[cur_img,score,matched_img]`
 
-
-1. `self.resume` refer to the pre-trained model
-2. `self.gallery_path` refer to the dir where we store our registered people
- 
 
 
 
