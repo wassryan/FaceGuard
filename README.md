@@ -79,4 +79,4 @@ And we used 2 subjects of Asian dataset and 8 subjects of our friends as our tes
 | 6  | 100.00 |
 | 7  | 95.00 |
 | 8  | 95.00 |
-| AVE  | 85.00 |
+| AVE  | 90.00 |
