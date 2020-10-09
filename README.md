@@ -3,7 +3,7 @@
 ### register part
 `python register.py`
 
-`new_img`refer to the img path that the people who are newly registered
+input : `new_img`refer to the img path that the people who are newly registered
 ### recog part
 `python recog_new.py`
 
