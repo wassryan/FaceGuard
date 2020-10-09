@@ -65,6 +65,19 @@ output: `[cur_img,score,matched_img]`
 | AVE  | 99.71 |
 
 ### 2. use our classmates' photos and 20 subjects left from last step
+we collected 20 classmates photos, each had 5 photos.
+in this step , we used 18 subjects of Asian dataset and 12 subjects of our friends to finetune the model from last step
+And we used 2 subjects of Asian dataset and 8 subjects of our friends as our test dataset.
 
-
-
+***evaluate***
+|  fold   | acc  |
+|  ----  | ----  |
+| 1  | 80.00 |
+| 2  | 75.00 |
+| 3  | 90.00 |
+| 4  | 95.00 |
+| 5  | 90.00 |
+| 6  | 100.00 |
+| 7  | 95.00 |
+| 8  | 95.00 |
+| AVE  | 85.00 |
