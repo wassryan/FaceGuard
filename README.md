@@ -1,7 +1,9 @@
 # FaceGuard
 ## run the model
 `python recog.py`
+
 input : `cur_img` refer to the img that we want to recog
+
 output: `[cur_img,score,matched_img]`
 
 
