@@ -8,8 +8,7 @@ output: `[cur_img,score,matched_img]`
 1. `self.resume` refer to the pre-trained model
 2. `self.gallery_path` refer to the dir where we store our registered people
  
-|  fold   | ----  |aaaaa|
-|  twst  | ----  |bbbb|
+
 
 
 ## How we finetune the model
