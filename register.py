@@ -76,11 +76,11 @@ if __name__ == '__main__':
 
         r = register(resume)
         r.run(root,new_img)
-    
+    '''
     result = scipy.io.loadmat('./best_result.mat')
 
     featureRs = result['fr']
     nr = result['nr']
     print(featureRs)
     print(nr)
-    
+    '''
