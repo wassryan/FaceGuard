@@ -14,10 +14,12 @@ class ARCFaceUI(QWidget):
         super(ARCFaceUI, self).__init__()
         self.true_face = False
         self.face_detected = False
+        self.det_box = None
         self.freezeLogo = False # True-> freeze, False-> allowing changing logo
         self.frameratio = 0.6
         self.framesize = (800, 450)
         self.crop_size = (224, 224)
+        self.logo_size = (112*2, 96*2)
 
         self.initUI()
 
@@ -28,24 +30,22 @@ class ARCFaceUI(QWidget):
 
         # self.through = Through()# 判断置信度，决定是否通过，并记录通过者的信息到list中
 
-        # 定时器
+        ##### Timer #####
         self.frametimer = QTimer(self)
         self.frametimer.timeout.connect(self.updateFrame)
         self.frametimer.start(20)
 
         self.logotimer = QTimer(self)
         self.logotimer.timeout.connect(self.unfreezeLogo)
-        self.logotimer.start(1000)
+        self.logotimer.start(2000)
 
-        # 线程之间同步操作
-        # arcface.finished即当arcface线程的run()函数执行完后，线程则会发出finished信号
-        # face recogntion finished-> return result back to GUI
+        self.recogtimer = QTimer(self)
+        self.recogtimer.timeout.connect(self.startFR)
+        self.recogtimer.start(2000)
 
-        # self.recog_face.finished.connect(self.getResult)  # 当人脸识别线程执行完,执行getresult() 获取结果
         self.recog_face.recog_msg.connect(self.getResult)
-        self.frametimer.timeout.connect(self.updateFrame)
+        self.frametimer.timeout.connect(self.updateFrame) # updateFrame(decide whether do recog)
         # self.connect(self.timer, SIGNAL('timeout()'), self.updateFrame)   # connect连接 定时器timer 每到20ms 就触发更新画面的函数
-        
         # self.through.pass_sign.connect(self.updateLogo)# 根据pass_sign信号(为一个str参数)决定是否需要更新UI界面上的logo
 
         '''
@@ -61,7 +61,6 @@ class ARCFaceUI(QWidget):
         self.freezeLogo = False
 
     def initUI(self):
-        
         # self.resize(600, 480)
         # self.move(50, 50)
         self.setGeometry(50,50, self.framesize[0], self.framesize[1]) # ax, ay, w, h
@@ -95,21 +94,23 @@ class ARCFaceUI(QWidget):
         # 图标标签
         self.icon_label = QLabel(self)
         self.logo_png = QtGui.QPixmap('./src/logo.png')
+        self.logo_png = self.logo_png.scaled(self.logo_size[1], self.logo_size[0], aspectRatioMode=Qt.KeepAspectRatio)
         # self.pass_png = QtGui.QPixmap('./src/pass.png')
         self.icon_label.setPixmap(self.logo_png)
-        self.icon_label.resize(300, 400)
+        self.icon_label.resize(self.logo_size[1], self.logo_size[0])
         self.setlayout()
         QtCore.QMetaObject.connectSlotsByName(self) # automatic connect signal to slot on widget
 
-    def startFR(self, det_box):
-        # ret, frame = self.camera.read()# read a frame from camera
-        # self.recog_face.transform_frame(det_box) # opencv->PIL
-        self.recog_face.image = det_box
-        self.recog_face.start() # start QThread run()
+
+    def startFR(self):
+        if self.true_face and (self.det_box is not None):
+            self.recog_face.image = self.det_box
+            self.recog_face.start()
+            self.true_face = False
 
     def exit_ARC(self):
-        self.recog_face.exit() # 中止人脸识别的线程
-        QCoreApplication.instance().quit() # 关闭窗口
+        self.recog_face.exit() # exit face recog thread
+        QCoreApplication.instance().quit() # exit window
         print("=> Happy Ending...")
 
     def getResult(self, msg):
@@ -121,7 +122,7 @@ class ARCFaceUI(QWidget):
         ##### Recog Result ######
         if self.freezeLogo: # in freeze time, do not update any result
             return
-        elif msg == "valid face" and self.true_face:
+        elif msg == "valid face": # and self.true_face:
             p = self.result.p # confidence
             faceName = self.result.faceName # result face name
             self.confid_text.setText(str(p))
@@ -143,16 +144,16 @@ class ARCFaceUI(QWidget):
         ##### update logo with database corresponding face #####
         if passthrough == 'yes':
             qtimg = QtGui.QPixmap(self.result.facePath)
-            qtimg = qtimg.scaled(300, 400, aspectRatioMode=Qt.KeepAspectRatio)
+            # qtimg = qtimg.scaled(300, 400, aspectRatioMode=Qt.KeepAspectRatio)
+            qtimg = qtimg.scaled(self.logo_size[1], self.logo_size[0], aspectRatioMode=Qt.KeepAspectRatio)
             # print(qtimg.height(), qtimg.width())
             self.icon_label.setPixmap(qtimg)
             self.freezeLogo = True
-            self.logotimer.start(1000) # reset timer
+            self.logotimer.start(1000) # restart timer from freezeLogo set True
             # self.icon_label.setScaledContents(True) # image adapt to label
         else:
             self.icon_label.setPixmap(self.logo_png)
 
-        # self.icon_label.resize(300, 400)
 
     def setlayout(self):
 
@@ -220,10 +221,8 @@ class ARCFaceUI(QWidget):
         frame_output, det_box, face_detected, true_face = self.detect_face.detectFace(frame)
         self.true_face = true_face
         self.face_detected = face_detected
-        if self.true_face: # 是真的人脸 才运行人脸识别
-            self.startFR(det_box)
-
-        else:
+        self.det_box = det_box
+        if not self.true_face:
             p = 0
             faceName = 'Unknown'
             self.confid_text.setText(str(p))
