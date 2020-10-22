@@ -30,7 +30,7 @@ class FRFace(QThread):
         self.model_path = './lib/070.ckpt'
         self.db_imgs = self.root + 'cropped_gallery/'
 
-        self.min_thresh = 0.3
+        self.min_thresh = 0.4
 
         #load the database feature
         self.db_dict = torch.load(self.db_path)
