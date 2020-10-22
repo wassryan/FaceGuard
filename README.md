@@ -15,15 +15,22 @@ This system is tested successfully under MacOS(havn't test on Ubuntu).
 
 ### Installation
 
-`pip install -r requirements.txt`
+```
+pip install -r requirements.txt
+```
 
 *Attention: version of opencv-python should prior to 4.2, or pyqt5 will crash*
 
 ### How to use
 
 #### Registration
-put face database under the `/data/cropped_gallery/`, run following command, this will produce feature data(`db_features.py`) extracted from the model.
-`python regist.py`
+put face database under the `/data/cropped_gallery/`, run following command, this will produce feature data(`db_features.pkl`) extracted from the model.
+
+```
+python regist.py
+```
 
 #### Start System
-`python main.py`
+```
+python main.py
+```
