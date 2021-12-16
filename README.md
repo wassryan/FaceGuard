@@ -2,9 +2,11 @@
 
 A new face recognition system (blow is our system's data flow)
 
+Demo can be found at [https://youtu.be/Fmw0E4przcg](https://youtu.be/Fmw0E4przcg)
+
 ![image](https://github.com/wassryan/FaceGuard/blob/master/src/model.png)
 
-Video can be found [here](https://youtu.be/Fmw0E4przcg)
+![image](https://github.com/wassryan/FaceGuard/blob/master/src/gui.png)
 
 ### Requirement
 
