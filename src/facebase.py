@@ -226,9 +226,9 @@ class FDFace():
         # cv2.imshow("im", det_box)
 
         frame_output = cv2.rectangle(frame, (left, top), (right, bottom), (0, 255, 0), 2)
-        blink_msg = "Blink Count: {}".format(self.blink_counter)
-        font = cv2.FONT_HERSHEY_SIMPLEX
-        frame_output = cv2.putText(frame_output, blink_msg, (50, 100), font, 1.2, (0,255,0), 2)
+        # blink_msg = "Blink Count: {}".format(self.blink_counter)
+        # font = cv2.FONT_HERSHEY_SIMPLEX
+        # frame_output = cv2.putText(frame_output, blink_msg, (50, 100), font, 1.2, (0,255,0), 2)
 
         return frame_output, det_box, self.faceDetected, self.Trueface
 

@@ -1,6 +1,8 @@
 ## FaceGuard
 
-A new face recognition system
+A new face recognition system (blow is our system's data flow)
+
+![image](https://github.com/wassryan/FaceGuard/blob/dev/src/model.png)
 
 ### Requirement
 
@@ -24,7 +26,8 @@ pip install -r requirements.txt
 ### How to use
 
 #### Registration
-put face database under the `/data/cropped_gallery/`, run following command, this will produce feature data(`db_features.pkl`) extracted from the model.
+1. put `shape_predictor_68_face_landmarks.dat` under `src/` folder
+2. put face database under the `/data/cropped_gallery/`, run following command, this will produce feature data(`db_features.pkl`) extracted from the model.
 
 ```
 python regist.py
